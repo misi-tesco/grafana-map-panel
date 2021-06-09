@@ -1,6 +1,7 @@
 # Changelog
 
 ## development
+- Add compatibility with Grafana 8
 
 ## v0.15.0
 - Support multiple metrics in popup content for Elasticsearch. Thanks, @matschaffer!
