@@ -801,4 +801,34 @@ describe('ClickthroughLinks', () => {
       expect(window.location.assign).toHaveBeenCalledWith('http://foo.bar/?foo=42.42&value=123.456');
     });
   });
+
+  describe('when a Worldmap is created with click set variable', () => {
+    beforeEach(() => {
+      // Create map.
+      ctrl.panel.clickvariable = 'store';
+      ctrl.settings = new PluginSettings(ctrl.panel, templateSrvMock, {});
+      worldMap.createMap();
+
+      // Load data and draw circles.
+      ctrl.data = new DataBuilder().withCountryAndValue('SE', 1).build();
+      worldMap.drawCircles();
+    });
+
+    it('should have registered a second click event', () => {
+      expect(worldMap.circles.length).toBe(1);
+      expect(worldMap.circles[0]._events.click.length).toBe(2);
+    });
+
+    it('should do its job when actually clicked', () => {
+      // TODO: mock variable assignment
+      // // Prepare interaction with window object.
+      // setupInteractionMocks();
+      //
+      // // Capture interaction.
+      // worldMap.circles[0].fire('click');
+      // expect(window.location.assign).toHaveBeenCalledWith('http://foo.bar');
+    });
+  });
+
+
 });

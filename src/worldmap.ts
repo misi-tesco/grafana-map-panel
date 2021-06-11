@@ -4,6 +4,7 @@ import './libs/leaflet_plus';
 import * as L from 'leaflet';
 import WorldmapCtrl from './worldmap_ctrl';
 import { ColorModes } from './model';
+import { getLocationSrv } from '@grafana/runtime';
 
 const tileServers = {
   'CARTO Positron': {
@@ -378,6 +379,20 @@ export default class WorldMap {
 
     // Deactivate all links first.
     circle.off('click');
+
+    if (this.ctrl.settings.clickvariable && this.ctrl.settings.clickvariable != "") {
+      circle.on('click', evt => {
+        // const varToSet = `var-${this.ctrl.settings.clickvariable}`;
+        // TODO: use defined property instead of fixed store
+        getLocationSrv().update({
+          query: {
+            'var-store': dataPoint.key,
+          },
+          partial: true,
+          replace: true,
+        });
+      })
+    }
 
     // Attach "onclick" event to data point linking.
     if (linkUrl) {
