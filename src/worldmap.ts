@@ -380,7 +380,7 @@ export default class WorldMap {
     // Deactivate all links first.
     circle.off('click');
 
-    if (this.ctrl.settings.clickvariable && this.ctrl.settings.clickvariable != "") {
+    if (this.ctrl.settings.clickvariable && this.ctrl.settings.clickvariable !== '') {
       circle.on('click', evt => {
         // const varToSet = `var-${this.ctrl.settings.clickvariable}`;
         // TODO: use defined property instead of fixed store
@@ -391,7 +391,7 @@ export default class WorldMap {
           partial: true,
           replace: true,
         });
-      })
+      });
     }
 
     // Attach "onclick" event to data point linking.

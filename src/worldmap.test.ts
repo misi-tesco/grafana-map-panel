@@ -829,6 +829,4 @@ describe('ClickthroughLinks', () => {
       // expect(window.location.assign).toHaveBeenCalledWith('http://foo.bar');
     });
   });
-
-
 });
