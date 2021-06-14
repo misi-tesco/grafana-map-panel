@@ -254,6 +254,11 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
   }
 
   refreshSafe() {
+    if (this.ignoreNextRefresh) {
+      this.ignoreNextRefresh = false;
+      return;
+    }
+
     /*
      * Conditionally refresh the plugin, but not if it's still loading.
      */
