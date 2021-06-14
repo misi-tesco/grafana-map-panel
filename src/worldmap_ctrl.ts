@@ -109,6 +109,7 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
   errors: ErrorManager;
 
   initializing: boolean;
+  ignoreNextRefresh: boolean;
 
   /** @ngInject */
   constructor($scope, $injector, $element, $document, contextSrv, templateSrv, $location) {
@@ -121,6 +122,7 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
     this.loadCss();
 
     this.initializing = true;
+    this.ignoreNextRefresh = false;
 
     this.errors = new ErrorManager();
     this.errors.registerDomains('data', 'location');
@@ -262,6 +264,10 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
   }
 
   onRefresh() {
+    if (this.ignoreNextRefresh) {
+      this.ignoreNextRefresh = false;
+      return;
+    }
     console.info('Refreshing panel. initializing=', this.initializing);
     this.errors.reset('data');
 

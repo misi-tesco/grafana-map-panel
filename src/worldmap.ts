@@ -382,6 +382,7 @@ export default class WorldMap {
 
     if (this.ctrl.settings.clickvariable && this.ctrl.settings.clickvariable !== '') {
       circle.on('click', evt => {
+        this.ctrl.ignoreNextRefresh = true;
         // const varToSet = `var-${this.ctrl.settings.clickvariable}`;
         // TODO: use defined property instead of fixed store
         getLocationSrv().update({
